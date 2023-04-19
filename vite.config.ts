@@ -7,13 +7,14 @@ import eslintPlugin from "vite-plugin-eslint"
 // import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression"
 import vitePluginImp from "vite-plugin-imp"
+import alias from "@rollup/plugin-alias";
 
 export default defineConfig((mode: ConfigEnv): UserConfig => {
   const env = loadEnv(mode.mode, process.cwd())
   const viteEnv = wrapperEnv(env)
 
   return {
-    define: { global: {} },
+    // define: { global: {} },
     resolve: {
       alias: {
         "@": resolve(__dirname, "./src")

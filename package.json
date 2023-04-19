@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ant-design/pro-components": "^2.4.4",
-    "antd": "^5.0.0",
+    "antd": "^4.24.8",
     "axios": "^0.27.2",
     "braft-editor": "^2.3.9",
     "braft-utils": "^3.0.12",

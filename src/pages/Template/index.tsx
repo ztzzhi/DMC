@@ -18,6 +18,7 @@ import { getUsermanage } from "../../api/usermanage"
 
 // import TableOrder from "@/components/TableOrder/TableOrder"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
+//@ts-ignore
 import useFormEdit from "./useFormEdit"
 
 import EditForm from "@/components/EditForm"
