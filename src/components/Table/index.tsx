@@ -8,6 +8,7 @@ interface Iprops {
   page: number
   loading: boolean
   isSelection?: boolean
+  isnotdoubleColor?: boolean
   selectRows?: (...set: any) => void
   onChange: (...set: any) => void
 }
@@ -34,9 +35,13 @@ export default function TableComponent(props: Iprops) {
     <Table
       className="tableClass"
       bordered
-      rowKey="id"
+      rowKey={record => record.id}
       rowSelection={rowSelection}
-      rowClassName={(_, index) => (index % 2 === 1 ? "tableBac" : "")}
+      rowClassName={
+        props.isnotdoubleColor
+          ? ""
+          : (_, index) => (index % 2 === 1 ? "tableBac" : "")
+      }
       dataSource={props.dataSource}
       columns={props.columns}
       pagination={{
@@ -55,8 +60,12 @@ export default function TableComponent(props: Iprops) {
     <Table
       className="tableClass"
       bordered
-      rowKey="id"
-      rowClassName={(_, index) => (index % 2 === 1 ? "tableBac" : "")}
+      rowKey={record => record.id}
+      rowClassName={
+        props.isnotdoubleColor
+          ? ""
+          : (_, index) => (index % 2 === 1 ? "tableBac" : "")
+      }
       dataSource={props.dataSource}
       columns={props.columns}
       pagination={{

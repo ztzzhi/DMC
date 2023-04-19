@@ -36,6 +36,8 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "react/prop-types": "off",
     "prettier/prettier": ["error", { "endOfLine": "auto" }]
   }
 }

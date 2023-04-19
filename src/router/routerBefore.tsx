@@ -23,7 +23,8 @@ export default function routerBefore({ children }: any) {
   poverArr.length = 0
   handleMenuList(menuList || [])
   if (poverArr.length === 0 && menuList.length !== 0) {
-    return <Navigate to={"/403"} replace></Navigate>
+    // return <Navigate to={"/401"} replace></Navigate>
+    return <>{children}</>
   } else {
     return <>{children}</>
   }

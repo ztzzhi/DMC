@@ -76,7 +76,7 @@ const UploadComponent = (props: any) => {
   return (
     <>
       <Upload
-        action={`/api/canteen/public/upload/image`}
+        action={`/api/family-bed/public/upload/image`}
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}

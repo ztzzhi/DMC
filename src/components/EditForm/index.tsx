@@ -1,18 +1,20 @@
 import { Form, Input, DatePicker, InputNumber, Switch, Select } from "antd"
 import Upload from "@/components/Upload"
+import "./index.less"
 const { RangePicker } = DatePicker
 const { Option } = Select
-import "./index.less"
 interface Iprops {
   form: any
   formConfigArray?: IItemArray[]
   layout?: "inline" | "horizontal" | "vertical"
   isNotModal?: boolean //是否用于modal中 在modal中自动居中 在整个页面靠左 见于会员列表modal以及会员新增
   onFinish?: (...set: any) => void
+  labelCol?: Record<string, number>
+  wrapperCol?: Record<string, number>
 }
 interface IItemArray {
-  name: string
-  label: string
+  name?: string
+  label?: string
   type?: string
   option?: IOption[]
   config?: object
@@ -21,6 +23,9 @@ interface IItemArray {
   rules?: any
   placeholder?: string
   tooltip?: string
+  format?: string
+  content?: React.ReactNode
+  colon?: boolean
 }
 
 interface IOption {
@@ -33,27 +38,21 @@ export default function EditFormComponent(props: Iprops) {
     const value = item.type ? item.type : "Input"
     switch (value) {
       case "Search":
-        return (
-          <Input.Search
-            placeholder={item.placeholder}
-            {...item.config}
-          ></Input.Search>
-        )
-        break
+        return <Input.Search placeholder={item.placeholder} {...item.config} />
       case "TextArea":
         return (
-          <Input.TextArea
+          <Input.TextArea placeholder={item.placeholder} {...item.config} />
+        )
+      case "Upload":
+        return <Upload {...item.config} />
+      case "InputNumber":
+        return (
+          <InputNumber
+            style={{ width: "100%" }}
             placeholder={item.placeholder}
             {...item.config}
-          ></Input.TextArea>
+          />
         )
-        break
-      case "Upload":
-        return <Upload {...item.config}></Upload>
-        break
-      case "InputNumber":
-        return <InputNumber placeholder={item.placeholder} {...item.config} />
-        break
       case "Select":
         return (
           <Select {...item.config} placeholder={item.placeholder}>
@@ -67,30 +66,22 @@ export default function EditFormComponent(props: Iprops) {
               })}
           </Select>
         )
-        break
       case "Switch":
-        return <Switch {...item.config}></Switch>
-        break
+        return <Switch {...item.config} />
       case "DatePicker":
         return (
           <DatePicker
+            style={{ width: "100%" }}
             placeholder={item.placeholder}
-            format="YYYY-MM-DD HH:mm:ss"
             {...item.config}
-          ></DatePicker>
+          />
         )
-        break
       case "RangePicker":
-        return (
-          <RangePicker
-            format="YYYY-MM-DD HH:mm:ss"
-            {...item.config}
-          ></RangePicker>
-        )
-        break
+        return <RangePicker format="YYYY-MM-DD HH:mm:ss" {...item.config} />
+      case "Custom":
+        return item?.content
       default:
-        return <Input placeholder={item.placeholder} {...item.config}></Input>
-        break
+        return <Input placeholder={item.placeholder} {...item.config} />
     }
   }
   // sm={24} md={24} lg={12} xl={8} xxl={6}
@@ -98,16 +89,19 @@ export default function EditFormComponent(props: Iprops) {
     <div className="form_edit_wrap">
       <Form
         form={props.form}
-        onFinish={props.onFinish}
         labelAlign="right"
         labelCol={
-          props.isNotModal
-            ? { span: 4 }
+          props.labelCol
+            ? props.labelCol
+            : props.isNotModal
+            ? { span: 2 }
             : { sm: 24, md: 24, lg: 6, xl: 6, xxl: 6 }
         }
         wrapperCol={
-          props.isNotModal
-            ? { span: 14 }
+          props.wrapperCol
+            ? props.wrapperCol
+            : props.isNotModal
+            ? { span: 7 }
             : props.layout === "vertical"
             ? { sm: 24, md: 24, lg: 24, xl: 24, xxl: 24 }
             : { sm: 24, md: 24, lg: 14, xl: 14, xxl: 14 }
@@ -124,6 +118,7 @@ export default function EditFormComponent(props: Iprops) {
                 valuePropName={item.valuePropName}
                 rules={item.rules}
                 tooltip={item.tooltip}
+                colon={item.colon}
               >
                 {getComponents(item)}
               </Form.Item>

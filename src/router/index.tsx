@@ -26,161 +26,98 @@ export const allRouters: RouteObjectObj[] = [
     component: lazy(() => import("@/pages/Login"))
   },
   {
-    path: "/",
+    path: "",
     component: lazy(() => import("@/containers/layout")),
     alivescope: true,
     children: [
       {
         path: "",
-        component: lazy(() => lazyFix(() => import("@/pages/Statistics")))
-      },
-      {
-        path: "/statistics",
-        component: lazy(() => lazyFix(() => import("@/pages/Statistics")))
+        component: lazy(() => lazyFix(() => import("@/pages/Usermanage")))
       },
       {
         path: "user",
         children: [
           {
-            path: "memberlist",
-            component: lazy(() => lazyFix(() => import("@/pages/MemberList")))
+            path: "userinfo",
+            component: lazy(() => lazyFix(() => import("@/pages/Usermanage")))
           },
           {
-            path: "memberlist/add",
-            component: lazy(() =>
-              lazyFix(() => import("@/pages/MemberList/add"))
-            )
+            path: "roule",
+            component: lazy(() => lazyFix(() => import("@/pages/Userrole")))
           },
           {
-            path: "memberlist/record",
-            component: lazy(() =>
-              lazyFix(() => import("@/pages/MemberList/record"))
-            )
-          },
-          {
-            // keepalive: "stafflist",
-            path: "stafflist",
-            component: lazy(() => lazyFix(() => import("@/pages/StaffList")))
-          },
-          {
-            path: "stafflist/add",
-            component: lazy(() =>
-              lazyFix(() => import("@/pages/StaffList/operation"))
-            )
+            path: "roule/edit",
+            component: lazy(() => lazyFix(() => import("@/pages/Userrole/add")))
           }
         ]
       },
-
       {
-        path: "order",
+        path: "scaffold",
         children: [
           {
-            path: "hallfoodlist",
-            component: lazy(() => lazyFix(() => import("@/pages/HallFoodList")))
+            path: "menu",
+            component: lazy(() => lazyFix(() => import("@/pages/Menumanage")))
           },
           {
-            path: "hallfoodlist/detail",
+            path: "menu/edit",
             component: lazy(() =>
-              lazyFix(() => import("@/pages/HallFoodList/detail"))
+              lazyFix(() => import("@/pages/Menumanage/add"))
             )
           },
           {
-            path: "subsidyrules",
-            component: lazy(() => lazyFix(() => import("@/pages/SubsidyRules")))
+            path: "app",
+            component: lazy(() => lazyFix(() => import("@/pages/Appmanage")))
           },
           {
-            path: "subsidytime",
-            component: lazy(() => lazyFix(() => import("@/pages/SubsidyTime")))
+            path: "app/edit",
+            component: lazy(() =>
+              lazyFix(() => import("@/pages/Appmanage/add"))
+            )
           }
         ]
       },
       {
-        path: "menu",
+        path: "device",
         children: [
           {
-            path: "weeklymenu",
-            component: lazy(() => lazyFix(() => import("@/pages/WeeklyMenu")))
-          },
-          {
-            path: "weeklymenu/add",
+            path: "deviceclassify",
             component: lazy(() =>
-              lazyFix(() => import("@/pages/WeeklyMenu/add"))
+              lazyFix(() => import("@/pages/DeviceManage/DeviceClassify"))
             )
           },
           {
-            path: "weeklymenu/stockroom",
+            path: "devicelist",
             component: lazy(() =>
-              lazyFix(() => import("@/pages/WeeklyMenu/stockroom"))
+              lazyFix(() => import("@/pages/DeviceManage/DeviceList"))
             )
           },
           {
-            path: "foodmgr",
-            component: lazy(() => lazyFix(() => import("@/pages/FoodMgr")))
-          },
-          {
-            path: "foodmgr/add",
-            component: lazy(() => lazyFix(() => import("@/pages/FoodMgr/add")))
-          },
-          {
-            path: "foodmgr/detail",
+            path: "devicelist/add",
             component: lazy(() =>
-              lazyFix(() => import("@/pages/FoodMgr/detail"))
+              lazyFix(() => import("@/pages/DeviceManage/DeviceList/add"))
             )
           },
           {
-            path: "dishesclassify",
+            path: "devicelist/listadd",
             component: lazy(() =>
-              lazyFix(() => import("@/pages/DishesClassify"))
+              lazyFix(() => import("@/pages/DeviceManage/DeviceList/listadd"))
             )
           }
         ]
       },
-
       {
-        path: "/yanglao",
-        component: lazy(() => lazyFix(() => import("@/pages/Template")))
-      },
-
-      {
-        path: "/canteenmag",
-        component: lazy(() => lazyFix(() => import("@/pages/CanteenMag")))
-      },
-
-      {
-        path: "/connectlogs",
-        component: lazy(() => lazyFix(() => import("@/pages/ConnectLogs")))
-      },
-      {
-        path: "/canteenmgrroot",
-        component: lazy(() => lazyFix(() => import("@/pages/CanteenMgrRoot")))
-      },
-      {
-        path: "/canteenmgrroot/add",
-        component: lazy(() =>
-          lazyFix(() => import("@/pages/CanteenMgrRoot/add"))
-        )
-      },
-      {
-        path: "/devicemgrroot",
-        component: lazy(() => lazyFix(() => import("@/pages/DeviceMgrRoot")))
-      },
-      {
-        path: "/devicemgrroot/add",
-        component: lazy(() =>
-          lazyFix(() => import("@/pages/DeviceMgrRoot/add"))
-        )
-      },
-      {
-        path: "/rolemgrroot",
-        component: lazy(() => lazyFix(() => import("@/pages/RoleMgrRoot")))
-      },
-      {
-        path: "/rolemgrroot/add",
-        component: lazy(() => lazyFix(() => import("@/pages/RoleMgrRoot/add")))
+        path: "institotionmanage",
+        children: [
+          {
+            path: "institotiolist",
+            component: lazy(() =>
+              lazyFix(() => import("@/pages/InstitutionManage/InstitutionList"))
+            )
+          }
+        ]
       }
     ]
   },
-  { path: "/bar", component: lazy(() => lazyFix(() => import("@/pages/bar"))) },
   {
     path: "/login",
     component: lazy(() => import("@/pages/Login"))
@@ -190,7 +127,7 @@ export const allRouters: RouteObjectObj[] = [
     component: lazy(() => import("@/pages/NotFound"))
   },
   {
-    path: "/403",
+    path: "/401",
     component: lazy(() => import("@/pages/NotPermission"))
   },
   {

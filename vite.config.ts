@@ -6,13 +6,14 @@ import { createHtmlPlugin } from "vite-plugin-html"
 import eslintPlugin from "vite-plugin-eslint"
 // import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression"
-import vitePluginImp from 'vite-plugin-imp'
+import vitePluginImp from "vite-plugin-imp"
 
 export default defineConfig((mode: ConfigEnv): UserConfig => {
   const env = loadEnv(mode.mode, process.cwd())
   const viteEnv = wrapperEnv(env)
 
   return {
+    define: { global: {} },
     resolve: {
       alias: {
         "@": resolve(__dirname, "./src")
@@ -27,27 +28,27 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
       proxy: {
         "/api": {
           target: "http://testapp.tt114.com",
-          changeOrigin: true,
+          changeOrigin: true
         }
       }
     },
     css: {
-			preprocessorOptions: {
-				less: {
-					javascriptEnabled: true,
-					additionalData: `@import "@/styles/var.less";`
-				}
-			}
-		},
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+          additionalData: `@import "@/styles/var.less";`
+        }
+      }
+    },
     plugins: [
       react(),
       vitePluginImp({
         libList: [
           {
             libName: "antd",
-            style: (name) => `antd/es/${name}/style`,
-          },
-        ],
+            style: name => `antd/es/${name}/style`
+          }
+        ]
       }),
       eslintPlugin(),
       createHtmlPlugin({
@@ -64,13 +65,13 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
       // }),
       // * gzip compress
       viteEnv.VITE_BUILD_GZIP &&
-        viteCompression({
-          verbose: true,
-          disable: false,
-          threshold: 10240,
-          algorithm: "gzip",
-          ext: ".gz"
-        })
+      viteCompression({
+        verbose: true,
+        disable: false,
+        threshold: 10240,
+        algorithm: "gzip",
+        ext: ".gz"
+      })
     ],
     esbuild: {
       pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : []

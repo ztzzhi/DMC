@@ -14,7 +14,7 @@ import {
   ProFormDateRangePicker
 } from "@ant-design/pro-components"
 
-import { getMemberlist } from "../../api/member"
+import { getUsermanage } from "../../api/usermanage"
 
 // import TableOrder from "@/components/TableOrder/TableOrder"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
@@ -50,7 +50,7 @@ const Index: React.FC = () => {
   }, [])
 
   const getList = async (param = {}) => {
-    const result: any = await getMemberlist(param)
+    const result: any = await getUsermanage(param)
     const { data, code } = result
     if (code === 0) {
       setList(data.data)

@@ -28,6 +28,7 @@ const Index = (props: any) => {
     pathnameArr.length > 3
       ? pathnameArr.slice(0, pathname.split("/").length - 1).join("/")
       : pathnameArr.join("/")
+
   const handleMenuList = (menuList: menuItemType[]): IMenuProps => {
     return menuList.map((item: IMenuItem) => {
       if (item.children) {
@@ -76,12 +77,12 @@ const Index = (props: any) => {
   return (
     <div className={style["left-nav"]}>
       <Menu
-        defaultSelectedKeys={[defaultSelectKey || "statistics"]}
-        defaultOpenKeys={[defaultOpenKeys || "statistics"]}
+        defaultSelectedKeys={[defaultSelectKey || "/user/userinfo"]}
+        defaultOpenKeys={[defaultOpenKeys || "/user/userinfo"]}
         mode={props.mode ? props.mode : "inline"}
         theme={props.theme ? props.theme : "light"}
         items={menuListArr}
-      ></Menu>
+      />
     </div>
   )
 }
