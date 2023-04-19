@@ -1,0 +1,15 @@
+/logs
+/server/mockData
+/node_modules
+/dist
+/build
+/onlinedist
+/src/assets/js
+/src/lib/achieve/KSWebBridge.js
+/package-lock.json
+.DS_Store
+fis-conf.js
+/public
+/src/reportWebVitals.ts
+/.eslintrc.js
+/craco.config.js
