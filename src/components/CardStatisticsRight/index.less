@@ -1,0 +1,67 @@
+.CardStatisticsRight {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px 30px;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+
+  .ant-card-body {
+    padding: 0;
+  }
+
+  .cardStyle {
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .myheader {
+    font-size: 18px;
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .myheader::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 4px;
+    height: 55%;
+    background-color: #2C68FF;
+  }
+
+  .ant-card-body {
+    text-align: center;
+  }
+
+  .cardgrid {
+    box-shadow: none;
+    padding: 8px 0;
+    width: 25%;
+    cursor: pointer;
+  }
+
+  .cardgrid:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  .mainContent {
+    display: flex;
+    flex-direction: column;
+    color: #363A44;
+
+    .num {
+      font-size: 24px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+    }
+
+    .text {
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-size: 14px;
+      font-weight: normal;
+    }
+  }
+}

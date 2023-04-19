@@ -6,6 +6,7 @@ import { createHtmlPlugin } from "vite-plugin-html"
 import eslintPlugin from "vite-plugin-eslint"
 // import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression"
+import vitePluginImp from 'vite-plugin-imp'
 
 export default defineConfig((mode: ConfigEnv): UserConfig => {
   const env = loadEnv(mode.mode, process.cwd())
@@ -21,18 +22,33 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
       host: "0.0.0.0", // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
       port: viteEnv.VITE_PORT,
       open: viteEnv.VITE_OPEN,
-      cors: true
+      cors: true,
       // https: false,
-      // proxy: {
-      //   "/api": {
-      //     target: "",
-      //     changeOrigin: true,
-      //     rewrite: path => path.replace(/^\/api/, "")
-      //   }
-      // }
+      proxy: {
+        "/api": {
+          target: "http://testapp.tt114.com",
+          changeOrigin: true,
+        }
+      }
     },
+    css: {
+			preprocessorOptions: {
+				less: {
+					javascriptEnabled: true,
+					additionalData: `@import "@/styles/var.less";`
+				}
+			}
+		},
     plugins: [
       react(),
+      vitePluginImp({
+        libList: [
+          {
+            libName: "antd",
+            style: (name) => `antd/es/${name}/style`,
+          },
+        ],
+      }),
       eslintPlugin(),
       createHtmlPlugin({
         inject: {
