@@ -9,6 +9,7 @@ import "./index.less"
 import { useNavigate } from "react-router-dom"
 import { reqAuth, getMenuInfo } from "@/api/index"
 import { APP_ID, BASE_URL, REDIRECT_URL } from "../../config"
+import axios from "axios"
 
 interface ApiForm {
   username: string
@@ -22,16 +23,22 @@ const Index: React.FC = () => {
   const urlArr = window.location.search.slice(1).split("&")
   const codeArr = urlArr.filter(item => item.indexOf("code") > -1)
   const code = (codeArr && codeArr.length && codeArr[0].split("=")[1]) || null
-
+  const href = ""
   useEffect(() => {
     if (code == null) {
-      window.location.href =
-        BASE_URL +
-        "/api/user/public/authorize?client_id=" +
-        APP_ID +
-        "&response_type=code&redirect_uri=" +
-        REDIRECT_URL +
-        "&scope=dev,Iot&state=state"
+      axios
+        .get(BASE_URL + "/api/user/public/authorize", {
+          params: {
+            client_id: APP_ID,
+            response_type: "code",
+            redirect_uri: REDIRECT_URL,
+            scope: "dev,Iot",
+            state: "state"
+          }
+        })
+        .then(() => {
+          window.location.href = BASE_URL + "/api/user/public/auth"
+        })
     } else {
       GetToken(code)
     }
@@ -41,7 +48,6 @@ const Index: React.FC = () => {
     try {
       setLoading(true)
       const res = await reqAuth(code, APP_ID, REDIRECT_URL)
-      console.log(res, "res")
       if (res.code === 200) {
         message.success(`登录成功`)
         dispatch(changeTokenAction({ token: res.data.access_token }))
