@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
+    "noImplicitThis": false,
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -38,6 +39,6 @@
   "exclude": [
     "node_modules",
     "dist",
-    "**/*.js"
+    "**/*.js",
   ]
 }

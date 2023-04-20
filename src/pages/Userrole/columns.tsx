@@ -90,7 +90,7 @@ export function useColumnsRecord() {
       dataIndex: "up_type",
       key: "up_type",
       render: type => {
-        const obj = { 0: "消费", 1: "充值", 2: "退款" }
+        const obj: Record<string, any> = { 0: "消费", 1: "充值", 2: "退款" }
         return obj[type]
       }
     },
@@ -100,7 +100,11 @@ export function useColumnsRecord() {
       dataIndex: "pay_type",
       key: "pay_type",
       render: type => {
-        const obj = { alipay: "支付宝", wechat: "微信", cash: "余额" }
+        const obj: Record<string, any> = {
+          alipay: "支付宝",
+          wechat: "微信",
+          cash: "余额"
+        }
         return obj[type]
       }
     },
