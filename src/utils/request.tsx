@@ -12,8 +12,9 @@ import {
   changeUserInfoAction,
   changeUserOrgIdAction
 } from "@/store/actions/user"
+import { Navigate } from "react-router-dom"
 import { APP_ID } from "@/config"
-
+let is401 = false
 const instance = axios.create({
   timeout: 4000
 })
@@ -44,6 +45,8 @@ instance.interceptors.response.use(
   },
   async error => {
     if (error.response.status === 401) {
+      if (is401) return
+      is401 = true
       // 无感刷新token
       const refresh_token =
         window.localStorage.getItem(APP_ID + "refresh_token") ?? null
@@ -53,10 +56,6 @@ instance.interceptors.response.use(
         window.localStorage.removeItem(APP_ID)
         window.localStorage.removeItem(APP_ID + "refresh_token")
         window.localStorage.removeItem(APP_ID + "user_info")
-        window.localStorage.removeItem(APP_ID + "org_id")
-        window.localStorage.removeItem(APP_ID + "cur_id")
-        window.localStorage.removeItem(APP_ID + "cur_name")
-        window.localStorage.removeItem(APP_ID + "menu_list")
         if (window.location.hash.indexOf("#") > -1) {
           window.location.hash = "/login"
         } else {
@@ -65,6 +64,9 @@ instance.interceptors.response.use(
         return
       }
       const res = await refreshToken({ refresh_token })
+      if (res.data.access_token) {
+        is401 = false
+      }
       store.dispatch(changeTokenAction({ token: res.data.access_token }))
       window.localStorage.setItem(APP_ID, res.data.access_token)
       window.localStorage.setItem(
@@ -73,19 +75,11 @@ instance.interceptors.response.use(
       )
       const info = await getUserInfo({})
       store.dispatch(changeUserInfoAction({ user_info: info.data.user_info }))
-      store.dispatch(changeUserOrgIdAction({ org_id: info.data.org_id }))
       window.localStorage.setItem(
         APP_ID + "user_info",
         JSON.stringify(info.data.user_info)
       )
-      window.localStorage.setItem(
-        APP_ID + "org_id",
-        JSON.stringify(info.data.org_id)
-      )
       window.location.reload()
-    } else {
-      message.error("系统异常")
-      return Promise.reject(error)
     }
     return Promise.reject(error)
   }
@@ -101,5 +95,9 @@ export const getRequest = (url = "", data = {}) => {
 }
 
 export const postRequest = (url = "", data = {}) => {
-  return instance.post(url, data)
+  //过滤对象中值为''
+  const filterData = Object.fromEntries(
+    Object.entries(data).filter(([_, val]) => val !== "")
+  )
+  return instance.post(url, filterData)
 }

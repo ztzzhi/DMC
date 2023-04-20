@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react"
 import { DownOutlined } from "@ant-design/icons"
 import { Input, Tree, AutoComplete, Spin } from "antd"
 import { getAdressData, getRegions } from "@/api"
-import adressFind from "@/utils/adressFind"
 import "./index.less"
 const Index = (props: any) => {
   const [adressData, setAdressData] = useState()
@@ -76,41 +75,62 @@ const Index = (props: any) => {
     <div id="SearchAdress">
       <div className="left">
         <div className="title">行政区划列表</div>
-        <AutoComplete
-          style={{ width: 200 }}
-          options={options}
-          onSelect={onSerchSelect}
-          onSearch={onChangeSearch}
-        >
-          <Input.Search
-            size="middle"
-            placeholder="请输入关键词"
-            enterButton="重置"
-            allowClear
-            onSearch={() => {
-              getAdrData()
-              setOptions([])
-            }}
-          />
-        </AutoComplete>
-        {loading ? (
-          <div>
-            <Spin style={{ margin: "200px 0 0 100px" }} />
-          </div>
-        ) : (
-          <Tree
-            style={{ marginTop: 10 }}
-            showLine
-            switcherIcon={<DownOutlined />}
-            onSelect={selectKeys => {
-              const area_id = selectKeys[0]
-              const city_id = getParentNode(area_id, adressData)?.key
-              const province_id = getParentNode(city_id, adressData)?.key
-              props.onTreeSelect({ province_id, city_id, area_id })
-            }}
-            treeData={adressData}
-          />
-        )}
+        <div>
+          {props.isSearch ? (
+            <>
+              <AutoComplete
+                style={{ width: 200 }}
+                options={options}
+                onSelect={onSerchSelect}
+                onSearch={onChangeSearch}
+              >
+                <Input.Search
+                  size="middle"
+                  placeholder="请输入关键词"
+                  enterButton="重置"
+                  allowClear
+                  onSearch={() => {
+                    getAdrData()
+                    setOptions([])
+                  }}
+                />
+              </AutoComplete>
+              {loading ? (
+                <div>
+                  <Spin style={{ margin: "200px 0 0 100px" }} />
+                </div>
+              ) : (
+                <Tree
+                  style={{ marginTop: 10 }}
+                  showLine
+                  switcherIcon={<DownOutlined />}
+                  onSelect={selectKeys => {
+                    const area_id = selectKeys[0]
+                    const city_id = getParentNode(area_id, adressData)?.key
+                    const province_id = getParentNode(city_id, adressData)?.key
+                    props.onTreeSelect({ province_id, city_id, area_id })
+                  }}
+                  treeData={adressData}
+                />
+              )}
+            </>
+          ) : (
+            <>
+              <Tree
+                style={{ marginTop: 10, width: 200 }}
+                showLine
+                switcherIcon={<DownOutlined />}
+                onSelect={selectKeys => {
+                  const area_id = selectKeys[0]
+                  const city_id = getParentNode(area_id, adressData)?.key
+                  const province_id = getParentNode(city_id, adressData)?.key
+                  props.onTreeSelect({ province_id, city_id, area_id })
+                }}
+                treeData={adressData}
+              />
+            </>
+          )}
+        </div>
       </div>
       <div className="right">{props.children}</div>
     </div>

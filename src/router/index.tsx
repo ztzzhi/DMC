@@ -113,6 +113,14 @@ export const allRouters: RouteObjectObj[] = [
             component: lazy(() =>
               lazyFix(() => import("@/pages/InstitutionManage/InstitutionList"))
             )
+          },
+          {
+            path: "administrativemanage",
+            component: lazy(() =>
+              lazyFix(
+                () => import("@/pages/InstitutionManage/AdministrativeManage")
+              )
+            )
           }
         ]
       }
@@ -166,7 +174,22 @@ const syncRouter = (table: RouteObjectObj[]): RouteObject[] => {
 
 function isKeepAlive(route: RouteObjectObj) {
   const content: React.ReactNode = route.component && (
-    <Suspense fallback={<div id="firstPage"></div>}>
+    <Suspense
+      fallback={
+        <div id="firstPage">
+          <div className="first-loading-wrap">
+            <div className="loading-wrap">
+              <span className="dot dot-spin">
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      }
+    >
       <route.component />
     </Suspense>
   )

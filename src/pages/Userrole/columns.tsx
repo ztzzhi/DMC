@@ -91,8 +91,6 @@ export function useColumnsRecord() {
       key: "up_type",
       render: type => {
         const obj = { 0: "消费", 1: "充值", 2: "退款" }
-        //@ts-ignore
-
         return obj[type]
       }
     },
@@ -103,8 +101,6 @@ export function useColumnsRecord() {
       key: "pay_type",
       render: type => {
         const obj = { alipay: "支付宝", wechat: "微信", cash: "余额" }
-        //@ts-ignore
-
         return obj[type]
       }
     },

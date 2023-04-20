@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { Space, Modal, Button, Form, Input, TreeSelect } from "antd"
-//@ts-ignore
 import RichEditor from "@/components/RichEditor"
 import CustomForm from "@/components/EditForm"
 import type { TableData } from "./types"

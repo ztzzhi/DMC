@@ -29,7 +29,6 @@ const Index: React.FC = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const urlArr = window.location.search.slice(1).split("&")
-
   const codeArr = urlArr.filter(item => item.indexOf("code") > -1)
   const code = (codeArr && codeArr.length && codeArr[0].split("=")[1]) || null
 
