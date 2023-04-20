@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react"
 
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { changeTokenAction, changeMenuList } from "@/store/actions/login"
 import { changeUserInfoAction } from "@/store/actions/user"
-import { Button, Form, Input, Checkbox, Tabs, message } from "antd"
-import { RootState } from "@/store"
-import { loginType, menuItemType } from "@/store/reducers/login"
-import logo from "@/assets/images/login/logologin.png"
-import { LockOutlined, UserOutlined } from "@ant-design/icons"
+import { message } from "antd"
+import { menuItemType } from "@/store/reducers/login"
 import "./index.less"
-import { useNavigate, useLocation } from "react-router-dom"
-import {
-  reqAuth,
-  getAdminRoute,
-  getUserInfo,
-  getMenuInfo,
-  userLogin
-} from "@/api/index"
+import { useNavigate } from "react-router-dom"
+import { reqAuth, getMenuInfo } from "@/api/index"
 import { APP_ID, BASE_URL, REDIRECT_URL } from "../../config"
 
 interface ApiForm {

@@ -7,25 +7,22 @@ import eslintPlugin from "vite-plugin-eslint"
 // import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression"
 import vitePluginImp from "vite-plugin-imp"
-import alias from "@rollup/plugin-alias";
 
 export default defineConfig((mode: ConfigEnv): UserConfig => {
   const env = loadEnv(mode.mode, process.cwd())
   const viteEnv = wrapperEnv(env)
 
   return {
-    // define: { global: {} },
     resolve: {
       alias: {
         "@": resolve(__dirname, "./src")
       }
     },
     server: {
-      host: "0.0.0.0", // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
+      host: "0.0.0.0",
       port: viteEnv.VITE_PORT,
       open: viteEnv.VITE_OPEN,
       cors: true,
-      // https: false,
       proxy: {
         "/api": {
           target: "http://testapp.tt114.com",
@@ -51,7 +48,9 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
           }
         ]
       }),
-      eslintPlugin(),
+      eslintPlugin({
+        fix: true
+      }),
       createHtmlPlugin({
         inject: {
           data: {
@@ -66,13 +65,13 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
       // }),
       // * gzip compress
       viteEnv.VITE_BUILD_GZIP &&
-      viteCompression({
-        verbose: true,
-        disable: false,
-        threshold: 10240,
-        algorithm: "gzip",
-        ext: ".gz"
-      })
+        viteCompression({
+          verbose: true,
+          disable: false,
+          threshold: 10240,
+          algorithm: "gzip",
+          ext: ".gz"
+        })
     ],
     esbuild: {
       pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : []

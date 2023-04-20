@@ -1,34 +1,30 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es2021": true
+  env: {
+    browser: true,
+    es2021: true
   },
-  "settings": {
-    "react": {
-      "version": 'detect'
+  settings: {
+    react: {
+      version: "detect"
     }
   },
-  "extends": [
+  extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    'plugin:react/jsx-runtime'
+    "plugin:react/jsx-runtime"
   ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
     },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
+    ecmaVersion: "latest",
+    sourceType: "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "prettier"
-  ],
-  "rules": {
+  plugins: ["react", "@typescript-eslint", "prettier"],
+  rules: {
     "prettier/prettier": "error",
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
@@ -38,6 +34,7 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "react/prop-types": "off",
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    "no-debugger": "off",
+    "prettier/prettier": ["error", { endOfLine: "auto" }]
   }
 }

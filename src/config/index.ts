@@ -4,6 +4,7 @@ const env = import.meta.env.MODE
 
 export const BASE_URL =
   env == "production" ? "https://yiy-tech.agebbs.cn/" : "http://127.0.0.1:3000"
+
 //脚手架地址
 export const SCAFFOLD_ADDRESS = "http://127.0.0.1:3000"
 //跳转地址

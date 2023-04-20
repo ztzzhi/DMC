@@ -3,9 +3,9 @@ import { Button, TreeSelect, Form, Input, Select, Space, message } from "antd"
 import PageContainer from "@/components/PageContainer/PageContainer"
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom"
 import { TableData } from "./types"
-//@ts-ignore
+// @ts-ignore
 import RichEditor from "@/components/RichEditor"
-//@ts-ignore
+// @ts-ignore
 import { ContentUtils } from "braft-utils"
 import useGetDeviceClass from "@/hooks/useGetDeviceClass"
 import { addList } from "@/api/devicelist"

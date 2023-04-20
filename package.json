@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite  --host",
     "build": "tsc && vite build --mode production",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./"
   },
@@ -41,7 +41,7 @@
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.7",
     "typescript": "~4.7.0",
-    "vite": "^4.2.0",
+    "vite": "^4.2.2",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-html": "^3.2.0"
